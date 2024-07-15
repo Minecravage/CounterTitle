@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 
 class Partner(commands.Cog):
     
@@ -7,6 +8,6 @@ class Partner(commands.Cog):
         self.bot = bot
         self.partnertext = partnert
         
-    @commands.command()
+    @commands.hybrid_command(name='partner', description="Affiche les partenaires du bot")
     async def partner(self, ctx):
         await ctx.send(self.partnertext)

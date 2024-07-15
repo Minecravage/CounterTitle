@@ -10,11 +10,11 @@ import sqlite3
 from dotenv import load_dotenv
 
 #Import des cogs
-from Cogs.Commandes_prefix.ping import Ping
-from Cogs.Commandes_prefix.partner import Partner
-from Cogs.Commandes_prefix.mode import Mode
-from Cogs.Commandes_prefix.help import Help
-from Cogs.Commandes_prefix.cns import Cns
+from Cogs.Commandes.ping import Ping
+from Cogs.Commandes.partner import Partner
+from Cogs.Commandes.mode import Mode
+from Cogs.Commandes.help import Help
+from Cogs.Commandes.cns import Cns
 
 from Cogs.Events.on_command_error import On_Command_Error
 from Cogs.Events.on_guild_join import On_Guild_Join
@@ -53,14 +53,12 @@ conn.close()
 
 async def main():
 
-    #Commandes préfixées
+    #Commandes
     await bot.add_cog(Ping(bot, discord.Color.from_str(hex)))
     await bot.add_cog(Cns(bot, discord.Color.from_str(hex)))
     await bot.add_cog(Help(bot, discord.Color.from_str(hex)))
+    await bot.add_cog(Mode(bot, discord.Color.from_str(hex)))
     await bot.add_cog(Partner(bot, partner_texte))
-    await bot.add_cog(Mode(bot))
-
-    #Commandes slash
 
     #Event
     await bot.add_cog(On_Command_Error(bot))

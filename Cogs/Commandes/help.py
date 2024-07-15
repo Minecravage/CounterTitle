@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 import datetime
 
 class Help(commands.Cog):
@@ -7,7 +8,15 @@ class Help(commands.Cog):
         self.bot = bot
         self.hexcolor = hexcolor
 
-    @commands.command()
+    @commands.hybrid_command(name='help', description="Affiche le paneau d'aide")
+    @app_commands.describe(commande='La commande')
+    @app_commands.choices(commande=[
+    app_commands.Choice(name="ping", value="ping"),
+    app_commands.Choice(name="cns", value="cns"),
+    app_commands.Choice(name="mode", value="mode"),
+    app_commands.Choice(name="partner", value="partner"),
+    app_commands.Choice(name="help", value="help")
+    ])
     async def help(self, ctx, commande='not specified'):
         if commande == 'not specified':
             helpembed = discord.Embed(
