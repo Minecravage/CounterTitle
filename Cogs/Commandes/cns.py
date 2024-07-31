@@ -52,7 +52,6 @@ class Cns(commands.Cog):
                         elif mode == "4":
                             member_count = round(member_count, 0)
 
-                        print(str(member_count))
                         ram_titre = titre.replace("%membercount%", str(member_count))
                         await ctx.guild.edit(name=ram_titre)
                     
