@@ -30,9 +30,10 @@ class Mode(commands.Cog):
                     cursor.execute("UPDATE server SET mode = ? WHERE discord = ?", (str(type), str(ctx.guild.id)))
                     conn.commit()
                     guild_id = ctx.guild.id
-                discord_id = (str(guild_id),)
-                cursor.execute("SELECT * FROM server WHERE discord = ?", discord_id)
-                ligne = cursor.fetchone()
+                
+                else:
+                    cursor.execute("INSERT INTO server (discord, mode, titre) VALUES (?, ?, ?)", (str(ctx.guild.id), str(type), str(ctx.guild.name)))
+                    conn.commit()
                 
                 if ligne:
                     mode = ligne[2]
@@ -54,9 +55,7 @@ class Mode(commands.Cog):
                             
                         ram_titre = titre.replace("%membercount%", str(member_count))
                         await ctx.guild.edit(name=ram_titre)
-                else:
-                    cursor.execute("INSERT INTO server (discord, mode, titre) VALUES (?, ?, ?)", (str(ctx.guild.id), str(type), str(ctx.guild.name)))
-                    conn.commit()
+
                 modeembed = discord.Embed(
                 title="Succès",
                 description=f'La commande à bien été éxécuté',
